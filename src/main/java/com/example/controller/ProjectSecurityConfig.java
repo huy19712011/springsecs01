@@ -21,7 +21,8 @@ public class ProjectSecurityConfig {
                 .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
                 .requestMatchers("/contact", "/notices", "/error").permitAll()
         );
-        http.formLogin(withDefaults());
+        //http.formLogin(withDefaults());
+        http.formLogin(flc -> flc.disable()); // flc = form login configuration
         http.httpBasic(withDefaults());
         System.out.println("custom security filter chain");
         return http.build();
