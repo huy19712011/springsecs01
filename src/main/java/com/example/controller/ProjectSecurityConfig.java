@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -44,7 +46,7 @@ public class ProjectSecurityConfig {
 
         UserDetails admin = User
                 .withUsername("admin")
-                .password("{noop}123456")
+                .password("{bcrypt}$2a$12$8.7CBbjoxldfb/ovHaDg1eCjt6VrtbmI9gFpkM9FCetkfxWFTFpa.") //123456, bcrypt = default
                 .authorities("admin")
                 .build();
 
@@ -53,5 +55,13 @@ public class ProjectSecurityConfig {
         List<UserDetails> userDetailsList = List.of(user, admin);
         return new InMemoryUserDetailsManager(userDetailsList);
 
+    }
+
+
+    //https://bcrypt-generator.com/
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
