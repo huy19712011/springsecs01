@@ -5,7 +5,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -19,12 +25,33 @@ public class ProjectSecurityConfig {
         //http.authorizeHttpRequests((requests) -> requests.anyRequest().denyAll());
         http.authorizeHttpRequests(requests -> requests
                 .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
-                .requestMatchers("/contact", "/notices", "/error").permitAll()
+                .requestMatchers("/contact", "/notices").permitAll()
         );
-        //http.formLogin(withDefaults());
-        http.formLogin(flc -> flc.disable()); // flc = form login configuration
+        //http.formLogin(flc -> flc.disable()); // flc = form login configuration
+        http.formLogin(withDefaults());
         http.httpBasic(withDefaults());
-        System.out.println("custom security filter chain");
         return http.build();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+
+        UserDetails user = User
+                .withUsername("user")
+                .password("{noop}123456")
+                .authorities("read")
+                .build();
+
+        UserDetails admin = User
+                .withUsername("admin")
+                .password("{noop}123456")
+                .authorities("admin")
+                .build();
+
+        //return new InMemoryUserDetailsManager(user, admin);
+
+        List<UserDetails> userDetailsList = List.of(user, admin);
+        return new InMemoryUserDetailsManager(userDetailsList);
+
     }
 }
