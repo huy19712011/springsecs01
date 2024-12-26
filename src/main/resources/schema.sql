@@ -16,11 +16,11 @@ create table authorities (
 create unique index ix_auth_username on authorities (username, authority);
 
 
-drop table if exists customers;
-CREATE TABLE customers (
-  id int NOT NULL IDENTITY(1,1),
-  email nvarchar(45) NOT NULL,
-  pwd nvarchar(200) NOT NULL,
-  role nvarchar(45) NOT NULL,
-  PRIMARY KEY (id)
-);
+-- drop table if exists customers;
+-- CREATE TABLE customers (
+--   id int NOT NULL IDENTITY(1,1),
+--   email nvarchar(45) NOT NULL,
+--   pwd nvarchar(200) NOT NULL,
+--   role nvarchar(45) NOT NULL,
+--   PRIMARY KEY (id)
+-- );

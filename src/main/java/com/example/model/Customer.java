@@ -20,4 +20,7 @@ public class Customer {
     private String email;
     private String pwd;
     private String role;
+
+    //private String field1;
+    //private String field2;
 }
