@@ -7,4 +7,4 @@ INSERT INTO authorities VALUES ('admin', 'admin');
 INSERT  INTO customers (email, pwd, role)
     VALUES ('happy@example.com', '{noop}admin@123456abc', 'read');
 INSERT  INTO customers (email, pwd, role)
-    VALUES ('admin@example.com', '{bcrypt}$2a$12$ZPWkZXZcRY964BojdVimbeoFEDsWlDea1TR5B1RLNFZ4x3Lo/Crde', 'admin');
+    VALUES ('admin@example.com', '{bcrypt}$2a$12$ZPWkZXZcRY964BojdVimbeoFEDsWlDea1TR5B1RLNFZ4x3Lo/Crde', 'admin'); --adminblah@123456
