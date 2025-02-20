@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.exception_handling.CustomBasicAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -29,7 +30,8 @@ public class ProjectSecurityProdConfig {
         );
         //http.formLogin(flc -> flc.disable()); // flc = form login configuration
         http.formLogin(withDefaults());
-        http.httpBasic(withDefaults());
+        http.httpBasic(hbc ->
+                hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
         return http.build();
     }
 
