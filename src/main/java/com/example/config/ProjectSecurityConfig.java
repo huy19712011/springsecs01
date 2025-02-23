@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.exception_handling.CustomAccessDeniedHandler;
 import com.example.exception_handling.CustomBasicAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +37,14 @@ public class ProjectSecurityConfig {
         http.formLogin(withDefaults());
         http.httpBasic(hbc ->
                 hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
+
+        //// Global exception handling, but skip this now
+        //http.exceptionHandling(ehc ->
+        //        ehc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
+
+        http.exceptionHandling(ehc ->
+                ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));
+
         return http.build();
     }
 

@@ -11,6 +11,7 @@
       <option name="customHeaders">
         <set>
           <option value="project-error-reason" />
+          <option value="project-denied-reason" />
         </set>
       </option>
     </inspection_tool>
