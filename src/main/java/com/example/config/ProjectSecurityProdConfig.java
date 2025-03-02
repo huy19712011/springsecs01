@@ -23,10 +23,11 @@ public class ProjectSecurityProdConfig {
         //http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
         //http.authorizeHttpRequests((requests) -> requests.anyRequest().denyAll());
         http
+                .sessionManagement(smc -> smc.invalidSessionUrl("/invalidSession"))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(requests -> requests
                 .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
-                .requestMatchers("/contact", "/notices", "/error", "/register").permitAll()
+                .requestMatchers("/contact", "/notices", "/error", "/register", "/invalidSession").permitAll()
         );
         //http.formLogin(flc -> flc.disable()); // flc = form login configuration
         http.formLogin(withDefaults());
