@@ -27,7 +27,7 @@ public class ProjectSecurityProdConfig {
                         smc.invalidSessionUrl("/invalidSession").maximumSessions(1))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(requests -> requests
-                .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
+                .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards", "/user").authenticated()
                 .requestMatchers("/contact", "/notices", "/error", "/register", "/invalidSession").permitAll()
         );
         //http.formLogin(flc -> flc.disable()); // flc = form login configuration
